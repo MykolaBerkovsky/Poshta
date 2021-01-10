@@ -1,0 +1,115 @@
+﻿@model Poshta.Models.USER
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Деталі працівника</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLES.role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLES.role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SECTION.REGIONCollection.region)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SECTION.REGIONCollection.region)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SECTION.town)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SECTION.town)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SECTION.n_section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SECTION.n_section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StanU.stan_u)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StanU.stan_u)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редагувати", "Edit", new { id = Model.contact_number }) |
+    @Html.ActionLink("Вернутись до списку", "Index")
+</p>

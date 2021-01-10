@@ -1,0 +1,105 @@
+﻿@model Poshta.Models.USER
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>При видаленні цього елемента будуть видалені також всі накладні пов'язані з ним.</h3>
+<h3>Якщо ви згодні натисніть "Видалити".</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLES.role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLES.role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SECTION.town)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SECTION.town)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StanU.stan_u)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StanU.stan_u)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Вернутись до списку", "Index")
+        </div>
+    }
+</div>

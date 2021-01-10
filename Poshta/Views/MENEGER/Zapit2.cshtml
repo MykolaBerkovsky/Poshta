@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Poshta.Models.Zaput2>
+@{
+    Layout = "~/Views/Shared/_LayoutMeneger.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Запит 2</h2>
+<table class="table">
+    <tr>
+        <th>
+            Номер накладної
+        </th>
+        <th>
+            Вартість(грн)
+        </th>
+        <th>
+            Оплата
+        </th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.nomer
+                </td>
+                <td>
+                    @item.cost
+                </td>
+                <td>
+                    @if (item.pay == true)
+                    {
+                        <p>Оплачено</p>
+                    }
+                    else
+                    {
+                        <p>Не оплачено</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h3 align="right">Загально: @ViewBag.resultSum грн</h3><a href="/MENEGER/Zapit2Exel">Отримати Ексель файл</a>

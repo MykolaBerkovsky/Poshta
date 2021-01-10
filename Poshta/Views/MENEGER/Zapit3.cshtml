@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Poshta.Models.Zaput3>
+@{
+    Layout = "~/Views/Shared/_LayoutMeneger.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Запит 3</h2>
+<table class="table">
+    <tr>
+        <th>
+            Прізвище
+        </th>
+        <th>
+            Ім'я
+        </th>
+        <th>
+            По батькові
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Кількість відправлень
+        </th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.first_name
+                </td>
+                <td>
+                    @item.last_name
+                </td>
+                <td>
+                    @item.surname
+                </td>
+                <td>
+                    @item.phone
+                </td>
+                <td>
+                    @item.count
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/MENEGER/Zapit3Exel">Отримати Ексель файл</a>

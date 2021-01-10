@@ -1,0 +1,265 @@
+﻿@model Poshta.Models.dopnakladna
+@{
+    Layout = "~/Views/Shared/_LayoutOperator.cshtml";
+}
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Створення накладної</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Відправник</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.phone_v, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.phone_v, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_v, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.v_l, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.v_l, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.v_l, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.v_f, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.v_f, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.v_f, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.v_s, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.v_s, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.v_s, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.v_mail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.v_mail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.v_mail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <h4>Отримувач</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.phone_g, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.phone_g, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_g, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.g_l, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.g_l, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.g_l, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.g_f, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.g_f, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.g_f, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.g_s, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.g_s, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.g_s, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.g_mail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.g_mail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.g_mail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <h4>Відділення</h4>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2">Область</label>
+            <div class="col-md-10">
+                <select id="Region" class="form-control">
+                    <option> </option>
+                    @foreach (var item in ViewBag.region)
+                    {
+                        <option value="@item.id_region">@item.region</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Місто</label>
+            <div class="col-md-10">
+                <select id="Town" class="form-control">
+                    <option> </option>
+                    @foreach (var item1 in ViewBag.town)
+                    {
+                        <option value="@item1.id_region">@item1.town</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Номер відділення</label>
+            <div class="col-md-10">
+                <select id="Nomer" class="form-control">
+                    <option> </option>
+                    @foreach (var item1 in ViewBag.nomer)
+                    {
+                        <option value="@item1.town">@item1.n_section</option>
+                    }
+                </select>      
+                @Html.ValidationMessageFor(model => model.id_region, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <h4>Інша додаткова інформація</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_package, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id_package", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_package, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.id_transort, "id_transort", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id_transort", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_transort, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.weight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.weight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.descriotion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descriotion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descriotion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dop_info, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dop_info, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dop_info, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <br />
+        <input id="town" type="text" value="fds" name="town" style="display: none;">
+        <input id="id_region" value="-4" type="number" name="id_region" style="display: none;" />
+        <input id="nom" value="-10" type="number" name="nom" style="display: none;" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="setv" value="Створити" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Region").change(function () {
+                var id = $("#Region").val();
+                var length = $("#Town option").each(function () {
+                    if ($(this).val() != id) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show().prop('selected', true);
+                    }
+                })
+                $("#Town option").first().show().prop('selected', true);
+                //var length = $("#Town").children('option').length;
+                //alert(length);
+                //$("#Town option[value='" + id + "']").hide();
+                //alert($("#Town option:selected").text());
+            });
+            $("#Town").change(function () {
+                var id = $("#Town option:selected").text();
+                var length = $("#Nomer option").each(function () {
+                    if ($(this).val() != id) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show().prop('selected', true);
+                    }
+                    $("#Nomer option").first().show().prop('selected', true);
+                })
+            });
+            $("#setv").click(function () {
+                    $("#id_region").val($("#Region").val());
+                    $("#town").val($("#Town option:selected").text());
+                    $("#nom").val($("#Nomer option:selected").text());
+            })
+            $("#phone_v").on("keypress keyup blur", function (event) {
+                $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+            $("#phone_g").on("keypress keyup blur", function (event) {
+                $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+}

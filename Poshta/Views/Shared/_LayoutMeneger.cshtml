@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Працівники", "Index", "USERs")</li>
+                    <li>@Html.ActionLink("Склад", "Index", "SectionPackages")</li>
+                    <li>@Html.ActionLink("Закупівля", "G", "MENEGER")</li>
+                    <li>@Html.ActionLink("Запит 1", "Zapit1", "MENEGER")</li>
+                    <li>@Html.ActionLink("Запит 2", "Zapit2", "MENEGER")</li>
+                    <li>@Html.ActionLink("Запит 3", "Zapit3", "MENEGER")</li>
+                    <li>
+                        <input id="textP" class="form-control" type="search" placeholder="Пошук" aria-label="Search" style="margin-top:7px; margin-bottom:auto">
+                    </li>
+                    <li><a id="btns" class="btn btn-outline-success my-2 my-sm-0" href="#">Пошук</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Account/LogOut"><span class="glyphicon glyphicon-log-out"></span> Вийти</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/scripts/jquery-3.4.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @RenderSection("scripts", required: false)
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#btns").click(function () {
+                    var phone = $("#textP").val();
+                    if ($.isNumeric(phone)) {
+                        $("#btns").attr("href", "/MENEGER/Zapit4?phone=" + $("#textP").val() + "");
+                    }
+                })
+                $("#textP").on("keypress keyup blur", function (event) {
+                    $(this).val($(this).val().replace(/[^\d].+/, ""));
+                    if ((event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Poshta.Models.SECTION>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Відділення</h2>
+
+<p>
+    <a class="btn btn-success" href="/SECTIONs/Create">Створити нове відділення</a>
+</p>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StanS.stan_s)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.REGIONCollection.region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.town)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.n_section)
+            </th>
+            <th>
+                Дії
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StanS.stan_s)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.REGIONCollection.region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.town)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.n_section)
+                </td>
+                <td>
+                    <a class="btn btn-success" href="/SECTIONs/Edit/@item.id_section">Редагувати</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Стан</th>
+            <th>Область</th>
+            <th>Місто</th>
+            <th>Відділення</th>
+        </tr>
+    </tfoot>
+</table>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "У таблиці відсутні дані",
+                    "info": "Показано від _START_ до _END_ із _TOTAL_ записів",
+                    "infoEmpty": "Показано 0 до 0 з 0 записів",
+                    "infoFiltered": "(відфільтровано з _MAX_ загальної кількості записів)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Показати _MENU_ записів",
+                    "loadingRecords": "Завантаження...",
+                    "processing": "Обробка...",
+                    "search": "Пошук:",
+                    "zeroRecords": "Відповідних записів не знайдено",
+                    "paginate": {
+                        "first": "Перший",
+                        "last": "Останній",
+                        "next": "Наступний",
+                        "previous": "Попередній"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }
+            });
+        });
+    </script>
+}

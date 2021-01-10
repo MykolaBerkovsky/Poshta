@@ -1,0 +1,73 @@
+﻿@model Poshta.Models.PACKAGE
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>При видаленні цього елемента будуть видалені також всі накладні пов'язані з ним.</h3>
+<h3>Якщо ви згодні натисніть "Видалити".</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StanP.stan_p)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StanP.stan_p)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.package_info)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.package_info)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.p_width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.p_width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.p_length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.p_length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.p_height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.p_height)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Вернутись до списку", "Index")
+        </div>
+    }
+</div>

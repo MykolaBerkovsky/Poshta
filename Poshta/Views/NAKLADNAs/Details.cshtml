@@ -1,0 +1,125 @@
+﻿@model Poshta.Models.NAKLADNA
+@{
+    Layout = "~/Views/Shared/_LayoutOperator.cshtml";
+}
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Деталі</h2>
+
+<div>
+    <h4>Накладна № @Model.n_nakladna</h4>
+    <hr />
+    <section class="landing">
+            <dl class="row">
+                <dt class="col-sm-2">Відправник</dt>
+                <dd class="col-sm-9">@Model.CASTOMER.last_name  @Model.CASTOMER.first_name  @Model.CASTOMER.surname</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Контактні дані</dt>
+                <dd class="col-sm-9">@Model.CASTOMER.phone  @Model.CASTOMER.mail</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Відділення відправника</dt>
+                <dd class="col-sm-9">Область @Model.USER.SECTION.REGIONCollection.region  м. @Model.USER.SECTION.town номер @Model.USER.SECTION.n_section</dd>
+            </dl>
+                <hr />
+            <dl class="row">
+                <dt class="col-sm-2">Отримувач</dt>
+                <dd class="col-sm-9">@Model.CASTOMER1.last_name  @Model.CASTOMER1.first_name  @Model.CASTOMER1.surname</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Контактні дані</dt>
+                <dd class="col-sm-9">@Model.CASTOMER1.phone  @Model.CASTOMER1.mail</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Відділення отримувача</dt>
+                <dd class="col-sm-9">Область @Model.SECTION.REGIONCollection.region  м. @Model.SECTION.town  номер @Model.SECTION.n_section</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Пакування</dt>
+                <dd class="col-sm-9">@Model.PACKAGE.package_info</dd>
+            </dl>
+        <hr />
+            <dl class="row">
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.StanTransp.transport_info)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.StanTransp.transport_info)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Дата і час відправки</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.date)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.weight)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.weight) кг.</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.descriotion)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.descriotion)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.dop_info)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.dop_info)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.cost)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.cost)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-2">Оплата</dt>
+                <dd id="p" class="col-sm-9">
+                    @if (Model.pay == true)
+                    {
+                        <p>Оплачено</p>
+                    }
+                    else
+                    {
+                        <p>Не оплачено</p>
+                    }
+                </dd>
+            </dl>
+        <hr />
+    </section>
+</div>
+<p>
+    <a class="btn btn-info" href="/NAKLADNAs/Index">Вернутись до списку</a>
+    <a class="btn btn-success" href="/NAKLADNAs/Edit?id=@Model.n_nakladna">Редагувати</a>
+    <a class="btn btn-primary" href="/test/GETWORD?id=@Model.n_nakladna">Друкувати</a>
+    <a class="btn btn-danger" href="/NAKLADNAs/Delete?id=@Model.n_nakladna">Видалити</a>
+    @if (Model.pay == false)
+    {
+        <input type="number" id="textboxPay" name="textboxPay" />
+        <a class="btn btn-warning" id="proverka" href="#">pay</a>
+    }
+    @if (Model.CASTOMER.mail != null)
+    {
+        <a class="btn btn-info" href="/test/SendM?id=@Model.n_nakladna&chek=true">Відправити відправнику лист</a>
+    }
+    @if (Model.CASTOMER1.mail != null)
+    {
+        <a class="btn btn-info" href="/test/SendM?id=@Model.n_nakladna&chek=false">Відправити отримувачу лист</a>
+    }
+</p>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#proverka").click(function () {
+                var money = $("#textboxPay").val();
+                if (money != "") {
+                    $("#proverka").attr("href", "/test/GETPAY?GetMoney=" + money + "&id=@Model.n_nakladna");
+                }
+                if ($("#textboxPay").val() > @Model.cost) {
+                    $("#proverka").hide();
+                    $("#textboxPay").hide();
+                    $("#p").text("Оплачено");
+                }
+            })
+            $("#pay").click(function () {
+                $("#pay").prop('checked', $("#pay").val());;
+            })
+        });
+    </script>
+}

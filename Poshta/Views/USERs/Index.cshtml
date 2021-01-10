@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Poshta.Models.USER>
+@if(ViewBag.Role == "Manager")
+{
+    Layout = "~/Views/Shared/_LayoutMeneger.cshtml";
+}
+else
+{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Працівники</h2>
+
+<p>
+    <a class="btn btn-success" href="/USERs/Create">Створити нового користувача</a>
+</p>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StanU.stan_u)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ROLES.role)
+            </th>
+            @if (ViewBag.Role == "Admin")
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.SECTION.town)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SECTION.n_section)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.last_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.first_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StanU.stan_u)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROLES.role)
+                </td>
+                @if (ViewBag.Role == "Admin")
+                {
+                    <th>
+                        @Html.DisplayFor(modelItem => item.SECTION.town)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.SECTION.n_section)
+                    </th>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.last_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.first_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    <a class="btn btn-success" href="/USERs/Edit/@item.contact_number">Редагувати</a>
+                    <a class="btn btn-info" href="/USERs/Details/@item.contact_number">Деталі</a>
+                    @if (ViewBag.Role == "Admin")
+                    {
+                        <a class="btn btn-danger" href="/USERs/Delete/@item.contact_number">Видалити</a>
+                    }  
+                </td>
+            </tr>
+        }
+    <tbody>
+    <tfoot>
+        <tr>
+            <th>Стан</th>
+            <th>Роль</th>
+            @if (ViewBag.Role == "Admin")
+            {
+                <th>Місто</th>
+                <th>Номер відділення</th>
+            }
+            <th>Прізвище</th>
+            <th>Ім'я</th>
+            <th>Телефон</th>
+        </tr>
+    </tfoot>
+</table>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "У таблиці відсутні дані",
+                    "info": "Показано від _START_ до _END_ із _TOTAL_ записів",
+                    "infoEmpty": "Показано 0 до 0 з 0 записів",
+                    "infoFiltered": "(відфільтровано з _MAX_ загальної кількості записів)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Показати _MENU_ записів",
+                    "loadingRecords": "Завантаження...",
+                    "processing": "Обробка...",
+                    "search": "Пошук:",
+                    "zeroRecords": "Відповідних записів не знайдено",
+                    "paginate": {
+                        "first": "Перший",
+                        "last": "Останній",
+                        "next": "Наступний",
+                        "previous": "Попередній"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,157 @@
+﻿@model IEnumerable<Poshta.Models.NAKLADNA>
+@{
+    Layout = "~/Views/Shared/_LayoutOperator.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Накладні</h2>
+
+<p>
+    @Html.ActionLink("Створити накладну", "Create")
+</p>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.n_nakladna)
+            </th>
+            <th>
+                Відправник
+            </th>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.USER.SECTION.REGIONCollection.region)</b>
+            </td>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.USER.SECTION.town)</b>
+            </td>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.USER.SECTION.n_section)</b>
+            </td>
+            <th>
+                Отримувач
+            </th>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.SECTION.REGIONCollection.region)</b>
+            </td>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.SECTION.town)</b>
+            </td>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.SECTION.n_section)</b>
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.StanTransp.transport_info)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.n_nakladna)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CASTOMER.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USER.SECTION.REGIONCollection.region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USER.SECTION.town)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USER.SECTION.n_section)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CASTOMER1.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SECTION.REGIONCollection.region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SECTION.town)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SECTION.n_section)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StanTransp.transport_info)
+                </td>
+                <td>
+                    @Html.ActionLink("Деталі", "Details", new { id = item.n_nakladna })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "У таблиці відсутні дані",
+                    "info": "Показано від _START_ до _END_ із _TOTAL_ записів",
+                    "infoEmpty": "Показано 0 до 0 з 0 записів",
+                    "infoFiltered": "(відфільтровано з _MAX_ загальної кількості записів)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Показати _MENU_ записів",
+                    "loadingRecords": "Завантаження...",
+                    "processing": "Обробка...",
+                    "search": "Пошук:",
+                    "zeroRecords": "Відповідних записів не знайдено",
+                    "paginate": {
+                        "first": "Перший",
+                        "last": "Останній",
+                        "next": "Наступний",
+                        "previous": "Попередній"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }
+            });
+        });
+
+    </script>
+}

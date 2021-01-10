@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Poshta.Models.sklad>
+@{
+    Layout = "~/Views/Shared/_LayoutMeneger.cshtml";
+}
+@{
+    ViewBag.Title = "Закупка пакування";
+}
+
+<h2>Закупка</h2>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            Назва
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.count)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.info)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.count)
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+@Html.ActionLink("Відправити лист на закупку", "SendZ")
